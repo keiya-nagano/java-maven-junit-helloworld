@@ -5,7 +5,7 @@ pipeline {
     environment {
         docker_image_name = "java8-maven3-junit5"
     }
-    
+
     agent {
     dockerfile {
         additionalBuildArgs '--no-cache=true --build-arg "JENKINS_USER_ID=112" --build-arg "JENKINS_GROUP_ID=117"'
@@ -16,16 +16,18 @@ pipeline {
         }
     }
     stages {
-        stage('maven execution') {
+
+        stage('Build'){
             steps {
-                script {
-                    dir('.') {
-                        sh 'set HTTP_PROXY=$HTTP_PROXY'
-                        sh 'set HTTPS_PROXY=$HTTP_PROXY'
-                        sh 'mvn package site --debug'
+                script{
+                    dir('.'){
+                        sh 'mvn clean package site'
                     }
+
                 }
+
             }
+
         }
         stage('Analysis') {
             steps {
@@ -36,6 +38,7 @@ pipeline {
                 }
             }
         }
+
     }
 
 }
