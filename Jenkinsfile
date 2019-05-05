@@ -40,11 +40,6 @@ pipeline {
             }
 
         }
-        stage('Test') {
-            steps {
-                jacoco execPattern: '**/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java', inclusionPattern: '**/*.java'
-            }
-        }
 
     }
     post {
@@ -55,6 +50,7 @@ pipeline {
                 [encoding: 'UTF-8', filePattern: '**/src/main/java/com/example/javamavenjunithelloworld/**.java', filePatternExclude: '', key: 'Java'],
                 [encoding: 'UTF-8', filePattern: '**/src/test/java/com/example/javamavenjunithelloworld/**.java', filePatternExclude: '', key: 'Test']
             ]
+            jacoco execPattern: '**/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java', inclusionPattern: '**/*.java'
 
 	    }
     }
