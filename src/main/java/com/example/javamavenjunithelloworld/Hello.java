@@ -27,7 +27,7 @@ public class Hello {
             ));
         }
         this.times = times;
-    }
+
 
     /**
      * Say "Hello!".
