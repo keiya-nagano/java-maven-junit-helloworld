@@ -37,6 +37,10 @@ pipeline {
                     }
 
                 }
+                stepcounter settings: [
+	                [encoding: 'UTF-8', filePattern: '**/src/main/java/com/example/javamavenjunithelloworld/**.java', filePatternExclude: '', key: 'Java'],
+	                [encoding: 'UTF-8', filePattern: '**/src/test/java/com/example/javamavenjunithelloworld/**.java', filePatternExclude: '', key: 'Test']
+                ]
             }
 
         }
