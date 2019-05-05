@@ -30,13 +30,11 @@ pipeline {
 
         }
         stage('Analysis') {
-            steps {
-                script {
-                    dir('.') {
-                        sh 'echo "Analysis stage"'
-                    }
-                }
+            steps{
+                recordIssues tool: checkStyle(pattern: "target/checkstyle-result.xml")
+                recordIssues tool: spotBugs(pattern: "target/spotbugsXml.xml")
             }
+
         }
 
     }
