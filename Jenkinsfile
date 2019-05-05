@@ -33,7 +33,7 @@ pipeline {
             steps{
                 script{
                     dir('.'){
-                        sh 'mvn checkstyle:checkstyle spotbugs:spotbugs'
+                        sh 'echo "Analysis stage"'
                     }
 
                 }
