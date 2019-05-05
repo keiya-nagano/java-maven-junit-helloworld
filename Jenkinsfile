@@ -42,7 +42,6 @@ pipeline {
         }
         stage('Test') {
             steps {
-                gradlew 'test jacocoTestReport -x classes -x testClasses'
                 jacoco execPattern: '**/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java', inclusionPattern: '**/*.java'
             }
         }
