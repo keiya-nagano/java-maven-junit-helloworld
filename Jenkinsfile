@@ -31,12 +31,21 @@ pipeline {
         }
         stage('Analysis') {
             steps{
-                recordIssues tool: checkStyle(pattern: "target/checkstyle-result.xml")
-                recordIssues tool: spotBugs(pattern: "target/spotbugsXml.xml")
+                script{
+                    dir('.'){
+                        sh 'mvn checkstyle:checkstyle spotbugs:spotbugs'
+                    }
+
+                }
             }
 
         }
 
     }
+    post {
+            recordIssues tool: checkStyle(pattern: "target/checkstyle-result.xml")
+            recordIssues tool: spotBugs(pattern: "target/spotbugsXml.xml")
+    }
+
 
 }
