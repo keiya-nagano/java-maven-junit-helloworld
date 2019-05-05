@@ -40,13 +40,19 @@ pipeline {
             }
 
         }
+        stage('Test') {
+            steps {
+                gradlew 'test jacocoTestReport -x classes -x testClasses'
+                jacoco execPattern: '**/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java', inclusionPattern: '**/*.java'
+            }
+        }
 
     }
     post {
 	    always{
             recordIssues tool: checkStyle(pattern: "target/checkstyle-result.xml")
             recordIssues tool: spotBugs(pattern: "target/spotbugsXml.xml")
-            stepcounter outputFile: 'target/stepCounter.xml',outputFormat: 'xml',settings: [
+            stepcounter settings: [
                 [encoding: 'UTF-8', filePattern: '**/src/main/java/com/example/javamavenjunithelloworld/**.java', filePatternExclude: '', key: 'Java'],
                 [encoding: 'UTF-8', filePattern: '**/src/test/java/com/example/javamavenjunithelloworld/**.java', filePatternExclude: '', key: 'Test']
             ]
