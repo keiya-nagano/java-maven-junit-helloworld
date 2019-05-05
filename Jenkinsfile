@@ -46,7 +46,7 @@ pipeline {
 	    always{
             recordIssues tool: checkStyle(pattern: "target/checkstyle-result.xml")
             recordIssues tool: spotBugs(pattern: "target/spotbugsXml.xml")
-            stepcounter outputFormat: 'xml',settings: [
+            stepcounter outputFile: 'target/stepCounter.xml',outputFormat: 'xml',settings: [
                 [encoding: 'UTF-8', filePattern: '**/src/main/java/com/example/javamavenjunithelloworld/**.java', filePatternExclude: '', key: 'Java'],
                 [encoding: 'UTF-8', filePattern: '**/src/test/java/com/example/javamavenjunithelloworld/**.java', filePatternExclude: '', key: 'Test']
             ]
